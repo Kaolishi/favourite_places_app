@@ -43,3 +43,12 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/app/build/
+/android/build/
+
+# Additional build artifacts to ignore
+**/build/
+*.apk
+*.aab
+android/app/build/
+android/build/
