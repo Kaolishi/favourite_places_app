@@ -1,0 +1,21 @@
+/// API Configuration Template
+/// 
+/// Instructions:
+/// 1. Copy this file and rename it to 'api_config.dart'
+/// 2. Replace the placeholder values with your actual API keys
+/// 3. Never commit the 'api_config.dart' file to version control
+/// 
+/// The actual 'api_config.dart' file is already added to .gitignore
+class ApiConfig {
+  /// Google Maps API Key
+  /// Get your key from: https://console.cloud.google.com/apis/credentials
+  /// Enable the following APIs:
+  /// - Maps Static API
+  /// - Geocoding API
+  static const String googleMapsApiKey = 'YOUR_GOOGLE_MAPS_API_KEY_HERE';
+  
+  /// Add other API keys here as needed
+  /// Example:
+  /// static const String openWeatherApiKey = 'YOUR_OPENWEATHER_API_KEY_HERE';
+  /// static const String firebaseApiKey = 'YOUR_FIREBASE_API_KEY_HERE';
+}

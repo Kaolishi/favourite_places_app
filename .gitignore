@@ -52,3 +52,6 @@ app.*.map.json
 *.aab
 android/app/build/
 android/build/
+
+# API Keys and sensitive configuration
+lib/config/api_config.dart
