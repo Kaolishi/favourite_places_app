@@ -71,14 +71,14 @@ try {
     }
     
     if ($LASTEXITCODE -eq 0) {
-        Write-Status "✅ Build completed successfully!"
-        Write-Warning "🔒 API key was securely injected during build"
-        Write-Warning "🚫 API key is NOT stored in any committed files"
+        Write-Status "Build completed successfully!"
+        Write-Warning "API key was securely injected during build"
+        Write-Warning "API key is NOT stored in any committed files"
     } else {
-        Write-Error "❌ Build failed with exit code: $LASTEXITCODE"
+        Write-Error "Build failed with exit code: $LASTEXITCODE"
         exit $LASTEXITCODE
     }
 } catch {
-    Write-Error "❌ Build failed with error: $_"
+    Write-Error "Build failed with error: $_"
     exit 1
 }
