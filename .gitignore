@@ -55,3 +55,5 @@ android/build/
 
 # API Keys and sensitive configuration
 lib/config/api_config.dart
+android/local.properties
+ANDROID_API_SETUP.md
