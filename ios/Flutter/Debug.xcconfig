@@ -1,1 +1,4 @@
 #include "Generated.xcconfig"
+
+// Google Maps API Key - injected via --dart-define during build
+// The key will be available in Info.plist as $(GOOGLE_MAPS_API_KEY)

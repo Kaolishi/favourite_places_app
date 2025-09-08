@@ -57,3 +57,4 @@ android/build/
 lib/config/api_config.dart
 android/local.properties
 ANDROID_API_SETUP.md
+ios/Flutter/api_keys.xcconfig
