@@ -12,8 +12,7 @@ A Flutter mobile application that allows users to capture and save their favorit
 - **📱 Cross-platform**: Runs on both Android and iOS devices
 
 ## Screenshots 📱
-
-*Add screenshots of your app here*
+Soon...
 
 ## Tech Stack 🛠️
 
@@ -230,4 +229,4 @@ If you have any questions or issues, please open an issue on GitHub or contact t
 
 ---
 
-**Built with ❤️ using Flutter**
+**Built using Flutter**
