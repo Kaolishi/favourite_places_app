@@ -3,11 +3,14 @@ import 'package:favourite_places_app/screens/map.dart';
 import 'package:flutter/material.dart';
 import 'package:favourite_places_app/config/api_config.dart';
 
+/// Detail screen showing full information about a selected place
+/// Displays the captured image, location preview, and address
 class PlaceDetailScreen extends StatelessWidget {
   const PlaceDetailScreen({super.key, required this.place});
 
   final Place place;
 
+  /// Generates Google Static Maps API URL for location preview
   String get locationImage {
     final lat = place.location.latitude;
     final lng = place.location.longitude;
@@ -27,25 +30,28 @@ class PlaceDetailScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
+          // Full-screen background image
           Image.file(
             place.image,
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
           ),
+          // Bottom overlay with location info
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: Column(
               children: [
+                // Circular map preview - tappable to open full map
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => MapScreen(
                           location: place.location,
-                          isSelecting: false,
+                          isSelecting: false, // View-only mode
                         ),
                       ),
                     );
@@ -55,6 +61,7 @@ class PlaceDetailScreen extends StatelessWidget {
                     backgroundImage: NetworkImage(locationImage),
                   ),
                 ),
+                // Address text with gradient background
                 Container(
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(

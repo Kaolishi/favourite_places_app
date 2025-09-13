@@ -8,6 +8,8 @@ import 'package:favourite_places_app/widgets/location_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// Screen for adding a new favorite place
+/// Collects title, image, and location data before saving
 class AddPlaceScreen extends ConsumerStatefulWidget {
   const AddPlaceScreen({super.key});
 
@@ -19,18 +21,22 @@ class AddPlaceScreen extends ConsumerStatefulWidget {
 
 class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   final _titleController = TextEditingController();
-  File? _selectedImage;
-  PlaceLocation? _selectedLocation;
+  File? _selectedImage; // Image captured by camera
+  PlaceLocation? _selectedLocation; // Location from GPS or map selection
 
+  /// Validates inputs and saves place to database
+  /// Returns early if any required field is missing
   void _savePlace() {
     final enteredTitle = _titleController.text;
 
+    // Validate all required fields are present
     if (enteredTitle.isEmpty ||
         _selectedImage == null ||
         _selectedLocation == null) {
       return;
     }
 
+    // Add place using provider and return to previous screen
     ref
         .read(userPlacesProvider.notifier)
         .addPlace(
@@ -58,6 +64,7 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
+            // Title input field
             TextField(
               decoration: const InputDecoration(labelText: 'Title'),
               controller: _titleController,
@@ -66,19 +73,21 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            // Image Input
+            // Camera input widget
             ImageInput(
               onPickImage: (image) {
                 _selectedImage = image;
               },
             ),
             const SizedBox(height: 16),
+            // Location input widget (GPS or map selection)
             LocationInput(
               onSetLocation: (location) {
                 _selectedLocation = location;
               },
             ),
             const SizedBox(height: 16),
+            // Save button - only works when all fields are filled
             ElevatedButton.icon(
               onPressed: _savePlace,
               label: const Text('Add Place'),

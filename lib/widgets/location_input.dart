@@ -8,10 +8,13 @@ import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+/// Widget for capturing location data via GPS or map selection
+/// Shows preview image and provides two input methods
 class LocationInput extends StatefulWidget {
   const LocationInput({super.key, required this.onSetLocation});
 
-  final void Function(PlaceLocation location) onSetLocation;
+  final void Function(PlaceLocation location)
+  onSetLocation; // Callback when location is selected
 
   @override
   State<LocationInput> createState() => _LocationInputState();
@@ -19,8 +22,9 @@ class LocationInput extends StatefulWidget {
 
 class _LocationInputState extends State<LocationInput> {
   PlaceLocation? _pickedLocation;
-  var _isGettingLocation = false;
+  var _isGettingLocation = false; // Loading state for GPS
 
+  /// Generates Google Static Maps API URL for location preview
   String get locationImage {
     if (_pickedLocation == null) {
       return '';
@@ -30,6 +34,8 @@ class _LocationInputState extends State<LocationInput> {
     return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$lat,$lng&key=${ApiConfig.googleMapsApiKey}';
   }
 
+  /// Converts coordinates to human-readable address using Google Geocoding API
+  /// Creates PlaceLocation object and notifies parent widget
   Future<void> _savePlace(double latitude, double longitude) async {
     final url = Uri.parse(
       'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=${ApiConfig.googleMapsApiKey}',
@@ -47,9 +53,11 @@ class _LocationInputState extends State<LocationInput> {
       _isGettingLocation = false;
     });
 
+    // Notify parent widget about selected location
     widget.onSetLocation(_pickedLocation!);
   }
 
+  /// Gets current GPS location with permission handling
   void _getCurrentLocation() async {
     Location location = Location();
 
@@ -57,6 +65,7 @@ class _LocationInputState extends State<LocationInput> {
     PermissionStatus permissionGranted;
     LocationData locationData;
 
+    // Check if location service is enabled
     serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled) {
       serviceEnabled = await location.requestService();
@@ -65,6 +74,7 @@ class _LocationInputState extends State<LocationInput> {
       }
     }
 
+    // Check and request location permissions
     permissionGranted = await location.hasPermission();
     if (permissionGranted == PermissionStatus.denied) {
       permissionGranted = await location.requestPermission();
@@ -74,7 +84,7 @@ class _LocationInputState extends State<LocationInput> {
     }
 
     setState(() {
-      _isGettingLocation = true;
+      _isGettingLocation = true; // Show loading indicator
     });
 
     locationData = await location.getLocation();
@@ -88,18 +98,16 @@ class _LocationInputState extends State<LocationInput> {
     _savePlace(lat, lng);
   }
 
+  /// Opens map screen for manual location selection
   void _selectOnMap() async {
-    final pickedLocation =
-        await Navigator.of(
-          context,
-        ).push<LatLng>(
-          MaterialPageRoute(
-            builder: (ctx) => const MapScreen(),
-          ),
-        );
+    final pickedLocation = await Navigator.of(context).push<LatLng>(
+      MaterialPageRoute(
+        builder: (context) => const MapScreen(),
+      ),
+    );
 
     if (pickedLocation == null) {
-      return;
+      return; // User cancelled or didn't select
     }
 
     _savePlace(pickedLocation.latitude, pickedLocation.longitude);
@@ -107,6 +115,7 @@ class _LocationInputState extends State<LocationInput> {
 
   @override
   Widget build(BuildContext context) {
+    // Default preview content
     Widget previewContent = Text(
       'No location chosen',
       textAlign: TextAlign.center,
@@ -115,6 +124,7 @@ class _LocationInputState extends State<LocationInput> {
       ),
     );
 
+    // Show map preview if location is selected
     if (_pickedLocation != null) {
       previewContent = Image.network(
         locationImage,
@@ -124,12 +134,14 @@ class _LocationInputState extends State<LocationInput> {
       );
     }
 
+    // Show loading indicator while getting GPS location
     if (_isGettingLocation) {
       previewContent = const CircularProgressIndicator();
     }
 
     return Column(
       children: [
+        // Location preview container
         Container(
           height: 170,
           width: double.infinity,
@@ -142,6 +154,7 @@ class _LocationInputState extends State<LocationInput> {
           ),
           child: previewContent,
         ),
+        // Action buttons for location input methods
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
