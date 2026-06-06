@@ -1,20 +1,17 @@
-# Favourite Places App 📍
+# Favourite Places App 
 
 A Flutter mobile application that allows users to capture and save their favorite locations with photos. Users can add places by taking pictures, getting their current GPS location, or manually selecting locations on an interactive map.
 
-## Features ✨
+## Features 
 
-- **📷 Photo Capture**: Take pictures using the device camera to associate with places
-- **🗺️ Interactive Maps**: View and select locations using Google Maps
-- **📍 GPS Location**: Get current location automatically using device GPS
-- **💾 Local Storage**: Persist data using SQLite database
-- **🎨 Modern UI**: Dark theme with beautiful Material Design 3 interface
-- **📱 Cross-platform**: Runs on both Android and iOS devices
+- **Photo Capture**: Take pictures using the device camera to associate with places
+- **Interactive Maps**: View and select locations using Google Maps
+- **GPS Location**: Get current location automatically using device GPS
+- **Local Storage**: Persist data using SQLite database
+- **Modern UI**: Dark theme with beautiful Material Design 3 interface
+- **Cross-platform**: Runs on both Android and iOS devices
 
-## Screenshots 📱
-Soon...
-
-## Tech Stack 🛠️
+## Tech Stack 
 
 - **Framework**: Flutter 3.32.8
 - **State Management**: Riverpod
@@ -25,7 +22,7 @@ Soon...
 - **HTTP Requests**: HTTP package for geocoding
 - **Typography**: Google Fonts (Ubuntu Condensed)
 
-## Project Structure 📁
+## Project Structure 
 
 ```
 lib/
@@ -48,14 +45,14 @@ lib/
     └── places_list.dart     # List widget for displaying places
 ```
 
-## Prerequisites 📋
+## Prerequisites 
 
 - Flutter SDK (3.32.8 or later)
 - Android Studio / VS Code
 - Android device/emulator or iOS device/simulator
 - Google Maps API key
 
-## Setup Instructions 🚀
+## Setup Instructions 
 
 ### 1. Clone the Repository
 ```bash
@@ -125,7 +122,7 @@ import GoogleMaps
 flutter run
 ```
 
-## Permissions 🔐
+## Permissions 
 
 The app requires the following permissions:
 
@@ -145,7 +142,7 @@ The app requires the following permissions:
 <string>This app needs camera access to take photos of your favorite places.</string>
 ```
 
-## Dependencies 📦
+## Dependencies 
 
 ```yaml
 dependencies:
@@ -163,7 +160,7 @@ dependencies:
   uuid: ^4.5.1
 ```
 
-## How to Use 📖
+## How to Use 
 
 1. **Launch the app** - You'll see the main screen with your saved places
 2. **Add a new place** - Tap the '+' button in the app bar
@@ -177,7 +174,7 @@ dependencies:
 5. **View details** - Tap any place in the list to see full details
 6. **View on map** - In detail view, tap the map preview to open full map
 
-## Building for Release 🏗️
+## Building for Release 
 
 ### Android APK:
 ```bash
@@ -194,7 +191,7 @@ flutter build appbundle --release
 flutter build ios --release
 ```
 
-## Troubleshooting 🔧
+## Troubleshooting 
 
 ### Common Issues:
 
@@ -211,7 +208,7 @@ flutter pub get         # Get dependencies
 flutter run -v          # Run with verbose output
 ```
 
-## Contributing 🤝
+## Contributing 
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/new-feature`)
@@ -219,11 +216,11 @@ flutter run -v          # Run with verbose output
 4. Push to the branch (`git push origin feature/new-feature`)
 5. Create a Pull Request
 
-## License 📄
+## License 
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Support 💬
+## Support 
 
 If you have any questions or issues, please open an issue on GitHub or contact the maintainer.
 
